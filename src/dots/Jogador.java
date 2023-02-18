@@ -13,12 +13,19 @@ import java.util.*;
 public class Jogador {
     Scanner ler = new Scanner(System.in);
     String[][] tabuleiro;
+    int pontos = 0;
+    String marcador;
     
-    public Jogador(String[][] tabuleiro){
+    public Jogador(String[][] tabuleiro, String marcador){
         this.tabuleiro = tabuleiro;
+        this.marcador = marcador;
     }
     
-    public void joga(int x, int y){
+    public int[] joga(){
+        Scanner ler = new Scanner(System.in);
+        int[] jogada = new int[2];
+        int x = ler.nextInt();
+        int y = ler.nextInt();
         
         if(!tabuleiro[x][y].equals("")){
             do{
@@ -28,8 +35,202 @@ public class Jogador {
             }while(!tabuleiro[x][y].equals(""));
         }
         if(x%2==0)
-                tabuleiro[x][y] = "-";
+            tabuleiro[x][y] = "-";
+        
         else
             tabuleiro[x][y] = "|";
+        
+        jogada[0] = x;
+        jogada[1] = y;
+        return jogada;       
+    }
+    
+    public boolean completou(int x, int y){
+        if(x==0 && y==1){
+            if(tabuleiro[1][0].equals("|")){
+                if(tabuleiro[1][2].equals("|")){
+                    if(tabuleiro[2][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==0 && y==3){
+            if(tabuleiro[1][4].equals("|")){
+                if(tabuleiro[1][2].equals("|")){
+                    if(tabuleiro[2][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==1 && y==0){
+            if(tabuleiro[0][1].equals("|")){
+                if(tabuleiro[1][2].equals("|")){
+                    if(tabuleiro[2][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==1 && y==2){
+            if(tabuleiro[1][0].equals("|")){
+                if(tabuleiro[0][1].equals("|")){
+                    if(tabuleiro[2][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+            
+            if(tabuleiro[1][4].equals("|")){
+                if(tabuleiro[0][3].equals("|")){
+                    if(tabuleiro[2][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+            
+        }
+        
+        if(x==1 && y==4){
+            if(tabuleiro[0][3].equals("-")){
+                if(tabuleiro[1][2].equals("|")){
+                    if(tabuleiro[2][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==2 && y==1){
+            if(tabuleiro[1][0].equals("|")){
+                if(tabuleiro[1][2].equals("|")){
+                    if(tabuleiro[0][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+            
+            if(tabuleiro[3][0].equals("|")){
+                if(tabuleiro[3][2].equals("|")){
+                    if(tabuleiro[4][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==2 && y==3){
+            if(tabuleiro[1][2].equals("|")){
+                if(tabuleiro[1][4].equals("|")){
+                    if(tabuleiro[0][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[1][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+            
+            if(tabuleiro[3][2].equals("|")){
+                if(tabuleiro[3][4].equals("|")){
+                    if(tabuleiro[4][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==3 && y==0){
+            if(tabuleiro[4][1].equals("-")){
+                if(tabuleiro[3][2].equals("|")){
+                    if(tabuleiro[2][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==3 && y==2){
+            if(tabuleiro[2][1].equals("-")){
+                if(tabuleiro[3][0].equals("|")){
+                    if(tabuleiro[4][1].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+            
+            if(tabuleiro[2][3].equals("-")){
+                if(tabuleiro[3][4].equals("|")){
+                    if(tabuleiro[4][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==3 && y==4){
+            if(tabuleiro[2][3].equals("-")){
+                if(tabuleiro[3][2].equals("|")){
+                    if(tabuleiro[4][3].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==4 && y==1){
+            if(tabuleiro[2][1].equals("-")){
+                if(tabuleiro[3][0].equals("|")){
+                    if(tabuleiro[3][2].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][1] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(x==4 && y==3){
+            if(tabuleiro[2][3].equals("-")){
+                if(tabuleiro[3][2].equals("|")){
+                    if(tabuleiro[3][4].equals("-")){
+                        this.pontos++;
+                        tabuleiro[3][3] = this.marcador;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
     }
 }

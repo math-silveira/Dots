@@ -16,6 +16,9 @@ public class Dots {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
         int restam = 0;
@@ -24,33 +27,40 @@ public class Dots {
         
         String[][] tabuleiro = {{"O", "", "O", "", "O"},{"", "O", "", "O", ""}, {"O", "", "O", "", "O"}, {"", "O", "", "O", ""}, {"O", "", "O", "", "O"}};
         
-        for(int i=0; i<5; i++){
-            for(int j=0; j<5;j++){
-                System.out.format("%3s ", tabuleiro[i][j]);
-            }
-            System.out.print("\n");
-        }
         
-        Jogador jogador1 = new Jogador(tabuleiro);
-        Jogador cpu = new Jogador(tabuleiro);
+        
+        Jogador jogador1 = new Jogador(tabuleiro, "J");
+        Jogador cpu = new Jogador(tabuleiro, "C");
                 
-        while(restam <12){
-            jogador1.joga(ler.nextInt(), ler.nextInt());
-
-            for(int i=0; i<5; i++){
-                for(int j=0; j<5;j++){
-                    System.out.format("%3s ", tabuleiro[i][j]);
+        while(restam <6){
+            int[] jogada;
+            System.out.print("\n");
+            do{
+                for(int i=0; i<5; i++){
+                    for(int j=0; j<5;j++){
+                        System.out.format("%3s ", tabuleiro[i][j]);
+                    }
+                    System.out.print("\n");
                 }
                 System.out.print("\n");
-            }
+                jogada = jogador1.joga();
+            }while(jogador1.completou(jogada[0], jogada[1]));
             
-            cpu.joga(ler.nextInt(), ler.nextInt());
-            for(int i=0; i<5; i++){
-                for(int j=0; j<5;j++){
-                    System.out.format("%3s ", tabuleiro[i][j]);
+            System.out.print("\n");
+            
+            do{
+                for(int i=0; i<5; i++){
+                    for(int j=0; j<5;j++){
+                        System.out.format("%3s ", tabuleiro[i][j]);
+                    }
+                    System.out.print("\n");
                 }
                 System.out.print("\n");
-            }
+                jogada = cpu.joga();
+            }while(cpu.completou(jogada[0], jogada[1]));
+            
+            
+            restam++;
         }
     }
 }
