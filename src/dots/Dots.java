@@ -25,14 +25,14 @@ public class Dots {
         System.out.print("Bem-vindo\n");
         Scanner ler = new Scanner(System.in);
         
-        String[][] tabuleiro = {{"O", "", "O", "", "O"},{"", "O", "", "O", ""}, {"O", "", "O", "", "O"}, {"", "O", "", "O", ""}, {"O", "", "O", "", "O"}};
+        String[][] tabuleiro = {{"O", "-", "O", "", "O"},{"", "O", "", "O", ""}, {"O", "", "O", "", "O"}, {"", "O", "", "O", ""}, {"O", "", "O", "", "O"}};
         
         
         
         Jogador jogador1 = new Jogador(tabuleiro, "J");
         Jogador cpu = new Jogador(tabuleiro, "C");
                 
-        while(restam <6){
+        while(restam <12){
             int[] jogada;
             System.out.print("\n");
             do{
@@ -48,18 +48,16 @@ public class Dots {
             
             System.out.print("\n");
             
-            do{
-                for(int i=0; i<5; i++){
-                    for(int j=0; j<5;j++){
-                        System.out.format("%3s ", tabuleiro[i][j]);
-                    }
-                    System.out.print("\n");
+            for(int i=0; i<5; i++){
+                for(int j=0; j<5;j++){
+                    System.out.format("%3s ", tabuleiro[i][j]);
                 }
                 System.out.print("\n");
-                jogada = cpu.joga();
-            }while(cpu.completou(jogada[0], jogada[1]));
-            
-            
+            }
+                System.out.print("\n");
+                
+                jogador1.cpuJoga(tabuleiro);
+                        
             restam++;
         }
     }

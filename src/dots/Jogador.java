@@ -45,6 +45,21 @@ public class Jogador {
         return jogada;       
     }
     
+    public void cpuJoga(String [][] tabuleiro){
+        int jogada[] = new int[2];
+        var arvorePossibilidades = new No(tabuleiro);
+        
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                this.tabuleiro[i][j] = tabuleiro[i][j];
+            }
+        }
+        
+        arvorePossibilidades.possibilidades();
+        
+        
+    }
+    
     public boolean completou(int x, int y){
         if(x==0 && y==1){
             if(tabuleiro[1][0].equals("|")){
