@@ -21,18 +21,18 @@ public class Dots {
     
     public static void main(String[] args) {
         // TODO code application logic here
-        int restam = 0;
+        int restam = 11;
         System.out.print("Bem-vindo\n");
         Scanner ler = new Scanner(System.in);
         
-        String[][] tabuleiro = {{"O", "-", "O", "", "O"},{"", "O", "", "O", ""}, {"O", "", "O", "", "O"}, {"", "O", "", "O", ""}, {"O", "", "O", "", "O"}};
+        String[][] tabuleiro = {{"O", "-", "O", "", "O"},{"", " ", "", " ", ""}, {"O", "", "O", "", "O"}, {"", " ", "", " ", ""}, {"O", "", "O", "", "O"}};
         
         
         
         Jogador jogador1 = new Jogador(tabuleiro, "J");
         Jogador cpu = new Jogador(tabuleiro, "C");
                 
-        while(restam <12){
+        while(restam >0){
             int[] jogada;
             System.out.print("\n");
             do{
@@ -43,22 +43,31 @@ public class Dots {
                     System.out.print("\n");
                 }
                 System.out.print("\n");
+                System.out.println("Vez do player");
                 jogada = jogador1.joga();
+                restam--;
             }while(jogador1.completou(jogada[0], jogada[1]));
             
             System.out.print("\n");
             
-            for(int i=0; i<5; i++){
-                for(int j=0; j<5;j++){
-                    System.out.format("%3s ", tabuleiro[i][j]);
-                }
-                System.out.print("\n");
-            }
-                System.out.print("\n");
+            
                 
-                jogador1.cpuJoga(tabuleiro);
+            do{
+                for(int i=0; i<5; i++){
+                    for(int j=0; j<5;j++){
+                        System.out.format("%3s ", tabuleiro[i][j]);
+                    }
+                    System.out.print("\n");
+                }
+                System.out.println("Vez da cpu");
+                
+                //por enquanto, a árvore está apenas sendo gerada.
+                jogada = cpu.cpuJoga(tabuleiro);
+                restam--;
+            }while(cpu.completou(jogada[0], jogada[1]));
+                
                         
-            restam++;
+            
         }
     }
 }

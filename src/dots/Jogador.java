@@ -16,6 +16,7 @@ public class Jogador {
     int pontos = 0;
     String marcador;
     
+    
     public Jogador(String[][] tabuleiro, String marcador){
         this.tabuleiro = tabuleiro;
         this.marcador = marcador;
@@ -34,18 +35,20 @@ public class Jogador {
                 y = ler.nextInt();
             }while(!tabuleiro[x][y].equals(""));
         }
-        if(x%2==0)
+        if(x%2==0){
+            
             tabuleiro[x][y] = "-";
-        
-        else
+        }else{
+            
             tabuleiro[x][y] = "|";
+            }
         
         jogada[0] = x;
         jogada[1] = y;
         return jogada;       
     }
     
-    public void cpuJoga(String [][] tabuleiro){
+    public int[] cpuJoga(String [][] tabuleiro){
         int jogada[] = new int[2];
         var arvorePossibilidades = new No(tabuleiro);
         
@@ -55,14 +58,17 @@ public class Jogador {
             }
         }
         
-        arvorePossibilidades.possibilidades();
+        jogada = arvorePossibilidades.possibilidades();
+        
+        //armazena a jogada escolhida pela cpu
         
         
+        return jogada;
     }
     
     public boolean completou(int x, int y){
         if(x==0 && y==1){
-            if(tabuleiro[1][0].equals("|")){
+            if(tabuleiro[1][0].equals("-")){
                 if(tabuleiro[1][2].equals("|")){
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
@@ -86,7 +92,7 @@ public class Jogador {
         }
         
         if(x==1 && y==0){
-            if(tabuleiro[0][1].equals("|")){
+            if(tabuleiro[0][1].equals("-")){
                 if(tabuleiro[1][2].equals("|")){
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
@@ -99,7 +105,7 @@ public class Jogador {
         
         if(x==1 && y==2){
             if(tabuleiro[1][0].equals("|")){
-                if(tabuleiro[0][1].equals("|")){
+                if(tabuleiro[0][1].equals("-")){
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
                         tabuleiro[1][1] = this.marcador;
@@ -109,7 +115,7 @@ public class Jogador {
             }
             
             if(tabuleiro[1][4].equals("|")){
-                if(tabuleiro[0][3].equals("|")){
+                if(tabuleiro[0][3].equals("-")){
                     if(tabuleiro[2][3].equals("-")){
                         this.pontos++;
                         tabuleiro[1][3] = this.marcador;
@@ -169,7 +175,7 @@ public class Jogador {
                 if(tabuleiro[3][4].equals("|")){
                     if(tabuleiro[4][3].equals("-")){
                         this.pontos++;
-                        tabuleiro[3][1] = this.marcador;
+                        tabuleiro[3][3] = this.marcador;
                         return true;
                     }
                 }
@@ -225,7 +231,7 @@ public class Jogador {
         if(x==4 && y==1){
             if(tabuleiro[2][1].equals("-")){
                 if(tabuleiro[3][0].equals("|")){
-                    if(tabuleiro[3][2].equals("-")){
+                    if(tabuleiro[3][2].equals("|")){
                         this.pontos++;
                         tabuleiro[3][1] = this.marcador;
                         return true;
@@ -237,7 +243,7 @@ public class Jogador {
         if(x==4 && y==3){
             if(tabuleiro[2][3].equals("-")){
                 if(tabuleiro[3][2].equals("|")){
-                    if(tabuleiro[3][4].equals("-")){
+                    if(tabuleiro[3][4].equals("|")){
                         this.pontos++;
                         tabuleiro[3][3] = this.marcador;
                         return true;
