@@ -48,9 +48,9 @@ public class Jogador {
         return jogada;       
     }
     
-    public int[] cpuJoga(String [][] tabuleiro){
+    public int[] cpuJoga(String [][] tabuleiro, int pontosCpu, int pontosUser, int restam){
         int jogada[] = new int[2];
-        var arvorePossibilidades = new No(tabuleiro);
+        var arvorePossibilidades = new No(tabuleiro, pontosCpu, pontosUser);
         
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){
@@ -58,7 +58,7 @@ public class Jogador {
             }
         }
         
-        jogada = arvorePossibilidades.possibilidades();
+        jogada = arvorePossibilidades.possibilidades(-1, restam);
         
         //armazena a jogada escolhida pela cpu
         
@@ -67,13 +67,15 @@ public class Jogador {
     }
     
     public boolean completou(int x, int y){
+        boolean flag = false;
+        
         if(x==0 && y==1){
             if(tabuleiro[1][0].equals("-")){
                 if(tabuleiro[1][2].equals("|")){
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
                         tabuleiro[1][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -85,7 +87,7 @@ public class Jogador {
                     if(tabuleiro[2][3].equals("-")){
                         this.pontos++;
                         tabuleiro[1][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -97,7 +99,7 @@ public class Jogador {
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
                         tabuleiro[1][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -109,7 +111,7 @@ public class Jogador {
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
                         tabuleiro[1][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -119,7 +121,7 @@ public class Jogador {
                     if(tabuleiro[2][3].equals("-")){
                         this.pontos++;
                         tabuleiro[1][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -132,7 +134,7 @@ public class Jogador {
                     if(tabuleiro[2][3].equals("-")){
                         this.pontos++;
                         tabuleiro[1][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -144,7 +146,7 @@ public class Jogador {
                     if(tabuleiro[0][1].equals("-")){
                         this.pontos++;
                         tabuleiro[1][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -154,7 +156,7 @@ public class Jogador {
                     if(tabuleiro[4][1].equals("-")){
                         this.pontos++;
                         tabuleiro[3][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -166,7 +168,7 @@ public class Jogador {
                     if(tabuleiro[0][3].equals("-")){
                         this.pontos++;
                         tabuleiro[1][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -176,7 +178,7 @@ public class Jogador {
                     if(tabuleiro[4][3].equals("-")){
                         this.pontos++;
                         tabuleiro[3][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -188,7 +190,7 @@ public class Jogador {
                     if(tabuleiro[2][1].equals("-")){
                         this.pontos++;
                         tabuleiro[3][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -200,7 +202,7 @@ public class Jogador {
                     if(tabuleiro[4][1].equals("-")){
                         this.pontos++;
                         tabuleiro[3][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -210,7 +212,7 @@ public class Jogador {
                     if(tabuleiro[4][3].equals("-")){
                         this.pontos++;
                         tabuleiro[3][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -222,7 +224,7 @@ public class Jogador {
                     if(tabuleiro[4][3].equals("-")){
                         this.pontos++;
                         tabuleiro[3][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -234,7 +236,7 @@ public class Jogador {
                     if(tabuleiro[3][2].equals("|")){
                         this.pontos++;
                         tabuleiro[3][1] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
@@ -246,12 +248,12 @@ public class Jogador {
                     if(tabuleiro[3][4].equals("|")){
                         this.pontos++;
                         tabuleiro[3][3] = this.marcador;
-                        return true;
+                        flag = true;
                     }
                 }
             }
         }
         
-        return false;
+        return flag;
     }
 }
